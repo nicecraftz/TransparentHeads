@@ -1,0 +1,33 @@
+name: TransparentHeads
+version: ${project.version}
+api-version: 1.15
+main: me.alexmc.TransparentHeads
+prefix: THeads
+authors: [ NiceCraftz ]
+description: Transparent heads on your minecraft Server!
+
+commands:
+  theads:
+    description: Main command of the plugin!
+    aliases: [transparentheads, transparenth, thead]
+
+permissions:
+  theads.admin:
+    children: [theads.get, theads.howto, theads.reload, theads.info, theads.list]
+    default: op
+    description: Gives access to every command of the plugin
+  theads.get:
+    default: op
+    description: Gives you access to /theads get comman
+  theads.howto:
+    default: op
+    description: Gives you access to /theads howto command
+  theads.reload:
+    default: op
+    description: Gives you access to /theads reload command
+  theads.info:
+    default: op
+    description: Gives you access to /theads info command
+  theads.list:
+    default: op
+    description: Gives you access to /theads list command

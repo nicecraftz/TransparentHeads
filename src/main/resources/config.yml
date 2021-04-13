@@ -1,0 +1,35 @@
+#  _     _                          _
+# | |_  | |__     ___    __ _    __| |  ___
+# | __| | '_ \   / _ \  / _` |  / _` | / __|
+# | |_  | | | | |  __/ | (_| | | (_| | \__ \
+# \__|  |_| |_|  \___|  \__,_|  \__,_| |___/
+
+# Visit:
+# https://imgur.com/a/vNde9EE
+# for Skin Templates
+
+# DON'T CHANGE THIS VALUE!
+config-version: 3
+
+added: "&f[&bTransparentHeads&f] &7Given Your Transparent Head!"
+reloaded: "&f[&bTransparentHeads&f] &7Config Reloaded!"
+no-perm: "&f[&bTransparentHeads&f] &cYou don't have permission to execute this command!"
+givelink: "&f[&bTransparentHeads&f] &cYou must provide a link for this command to work!"
+list-disabled: "&f[&bTransparentHeads&f] &cList feature is disabled, set server-list to true in the config to enable it back!"
+list-number-formatting: "&6&l%num%. "
+get-string: "&a&l[GET]"
+server-list: true
+
+tutorial:
+  - "&6&l• &7Tutorial"
+  - "&6&l1. &7Create a &beducation.minecraft.net &7account"
+  - "&6&l2. &7Download the template provided in the plugin folder"
+  - "&6&l3. &7Place The image you want inside the template and export ( hiding the template layer )"
+  - "&6&l4. &7Make the name of the file unique, and upload it to <my notes> section on &beducation.minecraft.net"
+  - "&6&l5. &7Copy the name file and the extension and execute the comamnd /theads get <uploadedfilename.extension>"
+  - "&6&l6. &7Boom here is your head ready to place and have fun with!"
+
+heads-list:
+  - "&4First Image,image1.png"
+  - "&eSecond Image,wawaw.png"
+
