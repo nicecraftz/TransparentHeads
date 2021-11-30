@@ -42,6 +42,14 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (args.length == 0) {
+            player.sendMessage(Utils.color("&7&m--------------------------\n"
+                    + "&6&l• &7Running &6&lTransparentHeads &7by NiceCraftz\n\n"
+                    + "&6&l> &e/theads reload\n"
+                    + "&6&l> &e/theads get <image>\n"
+                    + "&6&l> &e/theads info\n"
+                    + "&6&l> &e/theads howto\n"
+                    + "&6&l> &e/theads list\n"
+                    + "&7&m--------------------------"));
             return true;
         }
 
