@@ -8,15 +8,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
+import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public final class Utils {
 
-    private Utils() {
+    public static ItemStack getCustomTextureHead(String arg) {
+        String toEncode = "{\"textures\":{\"SKIN\":{\"url\":\"https://education.minecraft.net/wp-content/uploads/%args%\"}}}".replaceAll("%args%", arg);
+        String value = Base64.getEncoder().encodeToString(toEncode.getBytes());
 
-    }
-
-    public static ItemStack getCustomTextureHead(String value) {
         ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");
@@ -38,7 +40,11 @@ public final class Utils {
         return head;
     }
 
-    public static String toNColor(String s) {
+    public static String color(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
+    public static List<String> color(List<String> stringList) {
+        return stringList.stream().map(Utils::color).collect(Collectors.toList());
     }
 }

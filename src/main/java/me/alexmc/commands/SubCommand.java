@@ -3,8 +3,7 @@ package me.alexmc.commands;
 import org.bukkit.entity.Player;
 
 public interface SubCommand {
-
-    String getName();
+    String getPermission();
 
     String getDescription();
 

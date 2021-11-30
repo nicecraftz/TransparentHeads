@@ -14,8 +14,8 @@ public class ReloadCommand implements SubCommand {
     }
 
     @Override
-    public String getName() {
-        return "reload";
+    public String getPermission() {
+        return "theads.reload";
     }
 
     @Override
@@ -30,13 +30,9 @@ public class ReloadCommand implements SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("theads.reload")) {
-            plugin.async(() -> {
-                plugin.getConfigYml().reload();
-                player.sendMessage(plugin.getConfigYml().getFormattedString(Fields.RELOADED.getPath()));
-            });
-        } else {
-            player.sendMessage(plugin.getConfigYml().getFormattedString(Fields.NO_PERM.getPath()));
-        }
+        plugin.async(() -> {
+            plugin.getConfiguration().reload();
+            player.sendMessage(Fields.RELOADED.getFormattedString());
+        });
     }
 }

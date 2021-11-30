@@ -1,30 +1,19 @@
 package me.alexmc.commands.subcommands;
 
-import me.alexmc.TransparentHeads;
 import me.alexmc.commands.SubCommand;
 import me.alexmc.utils.Fields;
 import me.alexmc.utils.Utils;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.entity.Player;
 
 import java.util.Base64;
+import java.util.Objects;
 
 public class ListCommand implements SubCommand {
 
-    private final TransparentHeads plugin;
-
-    public ListCommand(TransparentHeads plugin) {
-
-        this.plugin = plugin;
-
-    }
-
     @Override
-    public String getName() {
-        return "list";
+    public String getPermission() {
+        return "theads.list";
     }
 
     @Override
@@ -39,35 +28,34 @@ public class ListCommand implements SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("theads.list")) {
-            if (plugin.getConfigYml().getBoolean(Fields.IS_LIST_ENABLED.getPath())) {
-                if (args.length > 1) {
-                    String toencode = "{\"textures\":{\"SKIN\":{\"url\":\"https://education.minecraft.net/wp-content/uploads/%args%\"}}}".replaceAll("%args%", args[1]);
-                    String encoded = Base64.getEncoder().encodeToString(toencode.getBytes());
-                    player.getInventory().addItem(Utils.getCustomTextureHead(encoded));
-                } else {
-                    int count = 1;
-                    for (String s : plugin.getConfigYml().getStringList(Fields.HEADS_LIST.getPath())) {
-                        String[] values = s.split(",");
-                        if (!s.isEmpty() && !values[0].isEmpty() && !values[1].isEmpty() && s.contains(",")) {
-                            TextComponent tc = new TextComponent(Utils.toNColor(values[0]));
-                            tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(plugin.getConfigYml().getFormattedString(Fields.GET_STRING.getPath())).create()));
-                            tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/theads list " + values[1]));
+        if (!Fields.IS_LIST_ENABLED.getBool()) {
+            player.sendMessage(Fields.LIST_DISABLED.getFormattedString());
+            return;
+        }
 
-                            String listNumberFormatting = Fields.LIST_NUMBER_FORMATTING.getPath();
-                            String val = plugin.getConfigYml().getFormattedString(listNumberFormatting);
+        if (args.length >= 2) {
+            player.getInventory().addItem(Objects.requireNonNull(Utils.getCustomTextureHead(args[1])));
+            return;
+        }
 
-                            TextComponent format = new TextComponent(val.replaceAll("%num%", String.valueOf(count)));
-                            player.spigot().sendMessage(format, tc);
-                            count++;
-                        }
-                    }
-                }
-            } else {
-                player.sendMessage(plugin.getConfigYml().getFormattedString(Fields.LIST_DISABLED.getPath()));
-            }
-        } else {
-            player.sendMessage(plugin.getConfigYml().getFormattedString(Fields.NO_PERM.getPath()));
+        int count = 1;
+
+        for (String s : Fields.HEADS_LIST.getStringList()) {
+            String[] split = s.split(",");
+            if (s.isEmpty() || split.length < 2 || !s.contains(",")) continue;
+
+            TextComponent textComponent = new TextComponent(Utils.color(split[0]));
+            BaseComponent[] baseComponents = new ComponentBuilder(Fields.GET_STRING.getFormattedString()).create();
+
+            textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, baseComponents));
+            textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/theads list " + split[1]));
+
+            String formatted = Fields.LIST_NUMBER_FORMATTING.getFormattedString().replace("%num%", count + "");
+            TextComponent finalComp = new TextComponent(formatted);
+            finalComp.addExtra(textComponent);
+
+            player.spigot().sendMessage(finalComp);
+            count++;
         }
     }
 }

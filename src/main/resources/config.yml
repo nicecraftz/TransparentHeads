@@ -13,6 +13,7 @@ config-version: 3
 
 added: "&f[&bTransparentHeads&f] &7Given Your Transparent Head!"
 reloaded: "&f[&bTransparentHeads&f] &7Config Reloaded!"
+unknown-arg: "&f[&bTransparentHeads&f] &cUnknown argument!"
 no-perm: "&f[&bTransparentHeads&f] &cYou don't have permission to execute this command!"
 givelink: "&f[&bTransparentHeads&f] &cYou must provide a link for this command to work!"
 list-disabled: "&f[&bTransparentHeads&f] &cList feature is disabled, set server-list to true in the config to enable it back!"
