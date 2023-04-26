@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import me.alexmc.TransparentHeads;
 import me.alexmc.commands.subcommands.*;
+import me.alexmc.utils.ColorAPI;
 import me.alexmc.utils.Fields;
-import me.alexmc.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -44,7 +44,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.sendMessage(Utils.color("&7&m--------------------------\n"
+            player.sendMessage(ColorAPI.color("&7&m--------------------------\n"
                     + "&6&l• &7Running &6&lTransparentHeads &7by NiceCraftz\n\n"
                     + "&6&l> &e/theads reload\n"
                     + "&6&l> &e/theads get <image>\n"
@@ -72,7 +72,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if(args.length > 1) return null;
+        if (args.length > 1) return null;
         List<String> completitions = Lists.newArrayList();
         StringUtil.copyPartialMatches(args[0], subCommands.keySet(), completitions);
         return completitions;

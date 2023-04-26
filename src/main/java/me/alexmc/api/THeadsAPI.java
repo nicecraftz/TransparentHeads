@@ -1,30 +1,30 @@
-package me.alexmc.utils;
+package me.alexmc.api;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import org.bukkit.ChatColor;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
 import java.util.Base64;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-public final class Utils {
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+public class THeadsAPI implements ITheadsAPI {
 
-    public static ItemStack getCustomTextureHead(String arg) {
-        return getCustomTextureHead(arg, true);
-    }
+    @Getter(lazy = true)
+    private static final ITheadsAPI instance = new THeadsAPI();
 
-    public static ItemStack getCustomTextureHead(String arg, boolean includeUrl) {
-
+    @Override
+    public ItemStack getHeadItem(String location, boolean includeDefaultUrl) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{\"textures\":{\"SKIN\":{\"url\":\"");
-        stringBuilder.append(includeUrl ? "https://education.minecraft.net/wp-content/uploads/" : "");
-        stringBuilder.append(arg);
+        stringBuilder.append(includeDefaultUrl ? "https://education.minecraft.net/wp-content/uploads/" : "");
+        stringBuilder.append(location);
         stringBuilder.append("\"}}}");
 
         String toEncode = stringBuilder.toString();
@@ -35,10 +35,10 @@ public final class Utils {
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures", value));
 
-        if (meta == null)
-            return null;
+        if (meta == null) return null;
 
         Field profileField;
+
         try {
             profileField = meta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
@@ -52,11 +52,5 @@ public final class Utils {
         return head;
     }
 
-    public static String color(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
-    }
 
-    public static List<String> color(List<String> stringList) {
-        return stringList.stream().map(Utils::color).collect(Collectors.toList());
-    }
 }

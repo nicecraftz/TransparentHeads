@@ -1,8 +1,7 @@
 package me.alexmc.commands.subcommands;
 
 import me.alexmc.commands.SubCommand;
-import me.alexmc.utils.Fields;
-import me.alexmc.utils.Utils;
+import me.alexmc.utils.ColorAPI;
 import org.bukkit.entity.Player;
 
 public class InfoCommand implements SubCommand {
@@ -24,7 +23,7 @@ public class InfoCommand implements SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        player.sendMessage(Utils.color(
+        player.sendMessage(ColorAPI.color(
                 "&7&m--------------------------\n"
                         + "&6&l• &7Running &6&lTransparentHeads &7by NiceCraftz\n\n"
                         + "&6&l> &eAuthor: NiceCraftz\n"

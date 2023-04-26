@@ -1,8 +1,8 @@
 package me.alexmc.commands.subcommands;
 
+import me.alexmc.api.THeadsAPI;
 import me.alexmc.commands.SubCommand;
 import me.alexmc.utils.Fields;
-import me.alexmc.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
@@ -30,7 +30,7 @@ public class GetWithLinkCommand implements SubCommand {
             return;
         }
 
-        player.getInventory().addItem(Objects.requireNonNull(Utils.getCustomTextureHead(args[1], false)));
+        player.getInventory().addItem(Objects.requireNonNull(THeadsAPI.getInstance().getHeadItem(args[1], false)));
         player.sendMessage(Fields.ADDED.getFormattedString());
     }
 }

@@ -1,8 +1,8 @@
 package me.alexmc.commands.subcommands;
 
 import me.alexmc.commands.SubCommand;
+import me.alexmc.utils.ColorAPI;
 import me.alexmc.utils.Fields;
-import me.alexmc.utils.Utils;
 import org.bukkit.entity.Player;
 
 public class HowCommand implements SubCommand {
@@ -24,6 +24,6 @@ public class HowCommand implements SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        Fields.TUTORIAL_LIST.getStringList().forEach(s -> player.sendMessage(Utils.color(s)));
+        Fields.TUTORIAL_LIST.getStringList().forEach(s -> player.sendMessage(ColorAPI.color(s)));
     }
 }

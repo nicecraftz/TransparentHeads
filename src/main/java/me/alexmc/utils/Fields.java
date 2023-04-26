@@ -30,7 +30,7 @@ public enum Fields {
     }
 
     public String getFormattedString() {
-        return Utils.color(plugin.getConfig().getString(path));
+        return ColorAPI.color(plugin.getConfig().getString(path));
     }
 
     public List<String> getStringList() {

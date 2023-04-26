@@ -1,12 +1,12 @@
 package me.alexmc.commands.subcommands;
 
+import me.alexmc.api.THeadsAPI;
 import me.alexmc.commands.SubCommand;
+import me.alexmc.utils.ColorAPI;
 import me.alexmc.utils.Fields;
-import me.alexmc.utils.Utils;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.entity.Player;
 
-import java.util.Base64;
 import java.util.Objects;
 
 public class ListCommand implements SubCommand {
@@ -34,7 +34,7 @@ public class ListCommand implements SubCommand {
         }
 
         if (args.length >= 2) {
-            player.getInventory().addItem(Objects.requireNonNull(Utils.getCustomTextureHead(args[1])));
+            player.getInventory().addItem(Objects.requireNonNull(THeadsAPI.getInstance().getHeadItem(args[1])));
             return;
         }
 
@@ -44,7 +44,7 @@ public class ListCommand implements SubCommand {
             String[] split = s.split(",");
             if (s.isEmpty() || split.length < 2 || !s.contains(",")) continue;
 
-            TextComponent textComponent = new TextComponent(Utils.color(split[0]));
+            TextComponent textComponent = new TextComponent(ColorAPI.color(split[0]));
             BaseComponent[] baseComponents = new ComponentBuilder(Fields.GET_STRING.getFormattedString()).create();
 
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, baseComponents));
