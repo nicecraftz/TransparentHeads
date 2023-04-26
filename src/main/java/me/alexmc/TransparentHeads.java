@@ -1,6 +1,7 @@
 package me.alexmc;
 
 import me.alexmc.commands.CommandManager;
+import me.alexmc.configuration.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

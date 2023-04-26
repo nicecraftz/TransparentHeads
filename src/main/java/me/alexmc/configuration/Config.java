@@ -1,6 +1,7 @@
-package me.alexmc;
+package me.alexmc.configuration;
 
 import lombok.Getter;
+import me.alexmc.TransparentHeads;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 

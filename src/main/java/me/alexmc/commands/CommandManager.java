@@ -29,6 +29,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subCommands.put("info", new InfoCommand());
         subCommands.put("howto", new HowCommand());
         subCommands.put("list", new ListCommand());
+        subCommands.put("getwithlink", new GetWithLinkCommand());
+
     }
 
     @Override

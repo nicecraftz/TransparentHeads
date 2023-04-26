@@ -16,13 +16,25 @@ import java.util.stream.Collectors;
 public final class Utils {
 
     public static ItemStack getCustomTextureHead(String arg) {
-        String toEncode = "{\"textures\":{\"SKIN\":{\"url\":\"https://education.minecraft.net/wp-content/uploads/%args%\"}}}".replaceAll("%args%", arg);
+        return getCustomTextureHead(arg, true);
+    }
+
+    public static ItemStack getCustomTextureHead(String arg, boolean includeUrl) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{\"textures\":{\"SKIN\":{\"url\":\"");
+        stringBuilder.append(includeUrl ? "https://education.minecraft.net/wp-content/uploads/" : "");
+        stringBuilder.append(arg);
+        stringBuilder.append("\"}}}");
+
+        String toEncode = stringBuilder.toString();
         String value = Base64.getEncoder().encodeToString(toEncode.getBytes());
 
         ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures", value));
+
         if (meta == null)
             return null;
 
